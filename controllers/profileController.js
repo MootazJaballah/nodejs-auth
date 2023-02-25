@@ -170,3 +170,21 @@ exports.isFavorite = async (req, res) => {
     return res.status(404).send(false);
   }
 };
+
+/**
+ *
+ * @param {express.Request} req
+ * @param {express.Response} res
+ */
+exports.updateAvatar = async (req, res) => {
+  await Profile.findOneAndUpdate(
+    { email: req.body.email },
+    { avatar: req.body.avatar }
+  )
+    .then((user) => {
+      if (!user) return res.status(404).json({ message: "User Not Found !" });
+
+      return res.status(200).send("done !");
+    })
+    .catch((error) => res.status(500).json(error));
+};
