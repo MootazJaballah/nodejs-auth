@@ -199,7 +199,7 @@ exports.getAvatar = async (req, res) => {
     .then((user) => {
       if (!user) return res.status(404).json({ message: "User Not Found !" });
 
-      return res.status(200).send(user.avatar);
+      return res.status(200).json(user.avatar);
     })
     .catch((error) => res.status(500).json(error));
 };
