@@ -30,7 +30,8 @@ router.post("/connexion", connexion);
 router.post("/resetUsername", resetUsername);
 
 router.post("/send-email", send_email);
-router.post("/:userId/:token", resetPassword);
+router.post("/resetPassword", resetPassword);
+
 // Reset password from app :
 router.post(
   "/resetPassword",

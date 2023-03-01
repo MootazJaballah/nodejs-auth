@@ -93,7 +93,7 @@ exports.send_email = async (req, res) => {
 
     let token = jwt.sign({ id: user._id }, "SECRET_KEY");
 
-    const link = `https://fierce-tick-overalls.cyclic.app/${user._id}/${token}`;
+    const link = `http://localhost:3000/?userId=${user._id}&token=${token}`;
     await sendEmail(user.email, "Password reset", link);
 
     res.status(200).send("password reset link sent to your email account");
@@ -114,7 +114,7 @@ exports.resetPassword = async (req, res) => {
     const { error } = schema.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    const user = await User.findById(req.params.userId);
+    const user = await User.findById(req.query.userId);
     if (!user) return res.status(400).send("invalid link or expired");
 
     const token = jwt.sign({ id: user._id }, "SECRET_KEY");
@@ -126,9 +126,9 @@ exports.resetPassword = async (req, res) => {
 
     await user.save();
 
-    res.status(200).send(user);
+    return res.status(200).json(user);
   } catch (error) {
-    res.send("An error occured");
+    res.json("An error occured");
     console.log(error);
   }
 };
