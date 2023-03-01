@@ -93,7 +93,7 @@ exports.send_email = async (req, res) => {
 
     let token = jwt.sign({ id: user._id }, "SECRET_KEY");
 
-    const link = `http://localhost:3000/${user._id}/${token}`;
+    const link = `https://fierce-tick-overalls.cyclic.app/${user._id}/${token}`;
     await sendEmail(user.email, "Password reset", link);
 
     res.status(200).send("password reset link sent to your email account");
