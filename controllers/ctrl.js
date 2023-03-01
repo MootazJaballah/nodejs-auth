@@ -93,7 +93,7 @@ exports.send_email = async (req, res) => {
 
     let token = jwt.sign({ id: user._id }, "SECRET_KEY");
 
-    const link = `https://long-erin-worm-wig.cyclic.app/?userId=${user._id}&token=${token}`;
+    const link = `https://beautiful-fudge-f0c4dc.netlify.app//?userId=${user._id}&token=${token}`;
     await sendEmail(user.email, "Password reset", link);
 
     res.status(200).send("password reset link sent to your email account");
