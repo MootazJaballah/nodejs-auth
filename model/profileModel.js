@@ -5,6 +5,7 @@ const profileSchema = mongoose.Schema({
   username: { type: String },
   email: { type: String },
   avatar: { type: Number, default: 1 },
+  points: { type: Number, default: 0 },
   history: [{ type: Object, default: null }],
   favorite: [{ type: Object, default: null }],
 });

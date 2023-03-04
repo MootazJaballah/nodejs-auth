@@ -203,3 +203,39 @@ exports.getAvatar = async (req, res) => {
     })
     .catch((error) => res.status(500).json(error));
 };
+
+/**
+ *
+ * @param {express.Request} req
+ * @param {express.Response} res
+ */
+exports.getPoints = async (req, res) => {
+  await Profile.findOne({ email: req.body.email })
+    .then((user) => {
+      if (!user) return res.status(404).json({ message: "User Not Found !" });
+
+      return res.status(200).json(user.points);
+    })
+    .catch((error) => res.status(500).json(error));
+};
+
+/**
+ *
+ * @param {express.Request} req
+ * @param {express.Response} res
+ */
+exports.updatePoints = async (req, res) => {
+  const profile = Profile.findOne({ email: req.body.email });
+
+  let point = profile.points;
+  await Profile.findOneAndUpdate(
+    { email: req.body.email },
+    { points: point + 1 }
+  )
+    .then((user) => {
+      if (!user) return res.status(404).json({ message: "User Not Found !" });
+
+      return res.status(200).send("done !");
+    })
+    .catch((error) => res.status(500).json(error));
+};
