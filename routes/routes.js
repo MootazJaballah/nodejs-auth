@@ -21,6 +21,7 @@ const {
   updateAvatar,
   getAvatar,
   getPoints,
+  updatePoints,
 } = require("../controllers/profileController");
 
 const router = Router();
@@ -109,6 +110,12 @@ router.post(
   "/getPoints",
   passport.authenticate("jwt", { session: false }),
   getPoints
+);
+
+router.post(
+  "/updatePoints",
+  passport.authenticate("jwt", { session: false }),
+  updatePoints
 );
 
 module.exports = router;
