@@ -234,5 +234,9 @@ exports.updatePoints = async (req, res) => {
   await Profile.findOneAndUpdate(
     { email: req.body.email },
     { points: profile.points + 1 }
-  );
+  )
+    .then(() => {
+      return res.status(200).json("done !");
+    })
+    .catch((error) => res.status(500).json(error));
 };
