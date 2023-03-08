@@ -225,7 +225,7 @@ exports.getPoints = async (req, res) => {
  * @param {express.Response} res
  */
 exports.updatePoints = async (req, res) => {
-  const profile = Profile.findOne({ email: req.body.email });
+  const profile = await Profile.findOne({ email: req.body.email }).exec();
 
   if (!profile) {
     return res.status(404).json("User Not Found !");
