@@ -231,11 +231,9 @@ exports.updatePoints = async (req, res) => {
     return res.status(404).json("User Not Found !");
   }
 
-  const newPoint = profile.points + 1;
-
   await Profile.findOneAndUpdate(
     { email: req.body.email },
-    { points: newPoint }
+    { points: Number(profile.points) + 1 }
   )
     .then(() => {
       return res.status(200).json("done !");
