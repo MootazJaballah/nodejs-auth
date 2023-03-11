@@ -1,6 +1,5 @@
 const express = require("express");
 const Image = require("../model/storeModel");
-const jwt = require("jsonwebtoken");
 
 /**
  *
@@ -9,8 +8,16 @@ const jwt = require("jsonwebtoken");
  */
 exports.getStore = async (req, res) => {
   await Image.find({})
-    .then((store) => res.status(200).json(store))
-    .catch((error) => res.status(500).json(error));
+    .then((article) => {
+      if (!article)
+        return res.status(404).json({ message: "article Not Found !" });
+
+      return res.status(200).json({ price: article.price });
+    })
+    .catch((error) => {
+      console.log(error);
+      return res.status(500).json(error);
+    });
 };
 
 /**
@@ -19,7 +26,15 @@ exports.getStore = async (req, res) => {
  * @param {express.Response} res
  */
 exports.getArticle = async (req, res) => {
-  await Image.findOne({ _id: req.body.id })
-    .then((store) => res.status(200).json(store))
-    .catch((error) => res.status(500).json(error));
+  await Image.findOne({ email: req.body.email })
+    .then((article) => {
+      if (!article)
+        return res.status(404).json({ message: "article Not Found !" });
+
+      return res.status(200).json(article);
+    })
+    .catch((error) => {
+      console.log(error);
+      return res.status(500).json(error);
+    });
 };

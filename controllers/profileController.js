@@ -1,6 +1,5 @@
 const express = require("express");
 const Profile = require("../model/profileModel");
-const jwt = require("jsonwebtoken");
 
 /**
  *
