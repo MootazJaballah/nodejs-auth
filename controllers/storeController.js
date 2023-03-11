@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
  * @param {express.Response} res
  */
 exports.getStore = async (req, res) => {
-  await Image.find()
+  await Image.find({})
     .then((store) => res.status(200).json(store))
     .catch((error) => res.status(500).json(error));
 };
