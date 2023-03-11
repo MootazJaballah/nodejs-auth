@@ -23,6 +23,7 @@ const {
   getPoints,
   updatePoints,
 } = require("../controllers/profileController");
+const { getStore, getArticle } = require("../controllers/storeController");
 
 const router = Router();
 
@@ -116,6 +117,18 @@ router.post(
   "/updatePoints",
   passport.authenticate("jwt", { session: false }),
   updatePoints
+);
+
+router.post(
+  "/store",
+  passport.authenticate("jwt", { session: false }),
+  getStore
+);
+
+router.post(
+  "/article",
+  passport.authenticate("jwt", { session: false }),
+  getArticle
 );
 
 module.exports = router;
