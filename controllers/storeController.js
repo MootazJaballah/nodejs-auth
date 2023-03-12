@@ -12,7 +12,7 @@ exports.getStore = async (req, res) => {
       if (!article)
         return res.status(404).json({ message: "article Not Found !" });
 
-      return res.status(200).json({ price: article.price });
+      return res.status(200).json(article);
     })
     .catch((error) => {
       console.log(error);

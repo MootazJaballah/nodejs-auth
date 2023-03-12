@@ -5,7 +5,7 @@ const storeSchema = new mongoose.Schema(
     _id: { type: String, default: mongoose.Types.ObjectId },
     price: { type: Number },
     description: { type: String },
-    images: [{ type: Buffer }],
+    image: [{ type: Object }],
     ArticleName: { type: String },
   },
   { collection: "images" }
